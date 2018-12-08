@@ -2,6 +2,7 @@
 coverage
 build
 functions-build
+functions
 node_modules
 stats.json
 nohup.out
