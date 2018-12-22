@@ -1,2 +1,5 @@
 # chennai-js.github.io
-chennai-js home page
+
+**Chennai** **JS** home page
+
+![](https://raw.githubusercontent.com/Rafi993/chennai-js.github.io/react-site/src/assets/chennai.jpg)
