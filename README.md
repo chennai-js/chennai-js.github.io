@@ -1,5 +1,18 @@
 # chennai-js.github.io
 
-**Chennai** **JS** home page
+**Chennai JS** home page
 
-![](https://raw.githubusercontent.com/Rafi993/chennai-js.github.io/react-site/src/assets/chennai.jpg)
+![](/src/assets/img/background.jpg)
+
+## To Build
+
+```
+  npm run build
+```
+
+## To Dev
+
+```
+  npm i
+  npm start
+```
