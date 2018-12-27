@@ -1,7 +1,7 @@
 body {
   background-color: #231f20;
   color: #fff;
-  font-style: sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 nav {
@@ -50,6 +50,12 @@ nav > ul > li > a:hover {
   margin: auto;
 }
 
+.home > p > img {
+  width: 20px;
+  vertical-align: bottom;
+  margin-left: 6px;
+}
+
 .home > img:last-child {
   width: 671px;
   margin: auto;
@@ -58,7 +64,7 @@ nav > ul > li > a:hover {
 
 a {
   color: #ffc732;
-  font-size: 18px;
+  font-size: 16px;
   padding-left: 10px;
 }
 
