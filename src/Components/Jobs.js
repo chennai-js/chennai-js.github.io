@@ -26,7 +26,7 @@ class Jobs extends Component {
             experience: job.gsx$experienceneeded.$t,
             location: job.gsx$location.$t,
             contact: job.gsx$contactemail.$t,
-            link: job.gsx$joblink.$t,
+            link: `mailto:${job.gsx$contactemail.$t}`,
             detail: job.gsx$moredetails.$t,
             date: job.gsx$dateofposting.$t,
             description: job.content.text
