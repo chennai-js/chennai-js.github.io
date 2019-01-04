@@ -1,5 +1,5 @@
-{
-  "react":[
+const resources = {
+  react: [
     "https://egghead.io/lessons/react-use-jsx-with-react",
     "http://slides.com/zerothabhishek/jsx#/",
     "http://slides.com/nileshr/isomorphic-react#/",
@@ -14,7 +14,7 @@
     "https://github.com/pvsrivathsa/todo-jest",
     "https://chennai-js.slack.com/files/U4EC8G4B0/F4SGFHW3T/angular_4_smart_and_prestantional_component|Angular 4 Smart and Prestantional Component"
   ],
-  "angular":[
+  angular: [
     "https://drive.google.com/open?id=14hS7dIatPfXD2f1C6dfSv7e8xtNS_r4y",
     "https://youtu.be/XQM0K6YG18s",
     "https://github.com/anishbenji/angular-hn-workshop",
@@ -22,21 +22,17 @@
     "https://chennai-js.slack.com/files/U4EC8G4B0/F4SGFHW3T/angular_4_smart_and_prestantional_component|Angular 4 Smart and Prestantional Component",
     "https://chennai-js.slack.com/files/U4DQFLBFF/F4TUJV8HM/angular_1|Angular 1.x",
     "https://chennai-js.slack.com/files/U4EC8G4B0/F4SGFHW3T/angular_4_smart_and_prestantional_component|Angular 4 Smart and Prestantional Component"
-
   ],
-  "bundler":[
-    "https://parceljs.org/"
-  ],
-  "package managers":[
+  bundler: ["https://parceljs.org/"],
+  "package managers": [
     "https://medium.com/@ericsimons/introducing-turbo-5x-faster-than-yarn-npm-and-runs-natively-in-browser-cc2c39715403"
   ],
-  "nodejs":[
+  nodejs: [
     "https://youtu.be/zlId7N7DDOY",
     "https://youtu.be/dwU2NsRIT-A",
     "https://medium.com/@_lrlna/garbage-collection-in-v8-an-illustrated-guide-d24a952ee3b8"
-
   ],
-  "misc": [
+  misc: [
     "https://sanctuary.js.org/",
     "https://mythbusters.js.org/#/",
     "https://www.youtube.com/watch?v=KFy3ZnCX4Do",
@@ -75,8 +71,10 @@
     "https://www.mathjax.org/",
     "https://www.notion.so/Everything-is-just-JavaScript-70c4ec351f884ba08b7775bc58064a25"
   ],
-  "general":[
+  general: [
     "http://www.forbesindia.com/article/leadership-awards-2017/zoho-busting-the-myth-that-great-software-can-only-be-written-in-silicon-valley/48691/1",
     "https://arstechnica.com/information-technology/2017/10/how-the-krack-attack-destroys-nearly-all-wi-fi-security/"
   ]
-}
+};
+
+export default resources;
