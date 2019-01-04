@@ -1,4 +1,16 @@
 const resources = {
+  JavaScript: [
+    "https://medium.mybridge.co/learn-javascript-from-top-50-articles-for-the-past-year-v-2019-57a26f277f47",
+    "https://frontendmasters.com/books/front-end-handbook/2018/",
+    "http://exploringjs.com/es2018-es2019/toc.html",
+    "https://medium.freecodecamp.org/want-to-learn-es6-take-this-free-23-part-course-and-become-a-javascript-ninja-55002db1ff74",
+    "https://medium.freecodecamp.org/here-are-examples-of-everything-new-in-ecmascript-2016-2017-and-2018-d52fa3b5a70e",
+    "http://exploringjs.com/es6/",
+    "https://cses.fi/book.pdf",
+    "https://github.com/imbrn/v8n",
+    "https://medium.freecodecamp.org/the-complete-javascript-handbook-f26b2c71719c",
+    "https://www.toptal.com/javascript/es6-class-chaos-keeps-js-developer-up"
+  ],
   react: [
     "https://egghead.io/lessons/react-use-jsx-with-react",
     "http://slides.com/zerothabhishek/jsx#/",
