@@ -9,8 +9,9 @@ const Home = () => (
   <div className="home">
     <h3>Welcome to</h3>
     <h2>The Javascript Community in Chennai</h2>
-    <a className="externalLink" href="" target="_blank">
-      Next meetup: TBD
+    Next meetup: {'  '}
+    <a className="externalLink" href="https://www.meetup.com/meetup-group-zZPQtwTs/events/258415023/" target="_blank">
+      Feb-2
     </a>
 
     <p>
