@@ -1,111 +1,101 @@
-import React, { Component } from "react";
+import { connect } from "react-redux";
+import React, { useEffect, useCallback } from "react";
 
-class Jobs extends Component {
-  state = {
-    text: "",
-    jobs: [],
-    msg: ""
-  };
+import { getFilteredJobs } from "src/reducers/jobs";
+import { getJobs, filterJobs } from "src/actions";
 
-  componentDidMount() {
-    const { search } = this.props.location;
-    this.params = new URLSearchParams(search);
-    this.setState({ text: this.params.get("text") || "" });
+const Jobs = ({
+  list,
+  error,
+  filter,
+  location,
+  history,
+  _getJobs,
+  _filterJobs
+}) => {
+  useEffect(() => {
+    _getJobs();
+  }, [_getJobs, _filterJobs]);
 
-    fetch(
-      "https://spreadsheets.google.com/feeds/list/1cNWOxv5M_NSV_ucf4ywLemWgu6r0Z3h2HHDyiDGrTho/default/public/full?alt=json"
-    )
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          msg: "",
-          jobs: data.feed.entry.map(job => ({
-            id: job.id.$t,
-            title: job.gsx$jobtitle.$t,
-            company: job.gsx$companyname.$t,
-            experience: job.gsx$experienceneeded.$t,
-            location: job.gsx$location.$t,
-            contact: job.gsx$contactemail.$t,
-            link: job.gsx$joblink.$t,
-            detail: job.gsx$moredetails.$t,
-            date: job.gsx$dateofposting.$t,
-            description: job.content.text
-          }))
-        });
-      })
-      .catch(e => {
-        this.setState({
-          msg: "Error Fetching Job listing"
-        });
+  useEffect(() => {
+    const { search } = location;
+    const params = new URLSearchParams(search);
+    _filterJobs({ search: params.get("text") });
+  }, [location, _filterJobs]);
+
+  const handleSearch = useCallback(
+    e => {
+      const { value } = e.target;
+      _filterJobs({ search: value });
+      history.push({
+        pathname: "/jobs",
+        search: "?" + new URLSearchParams({ text: value }).toString()
       });
-  }
+    },
+    [history, _filterJobs]
+  );
 
-  handleChange = e => {
-    const { value } = e.target;
-    const { history } = this.props;
-    this.setState({ text: value });
-    if (this.params) {
-      this.params.set("text", value);
-      history.replace({ ...history.location, search: this.params.toString() });
-    }
-  };
+  const { search } = filter;
 
-  render() {
-    const { text, msg, jobs } = this.state;
-
-    return (
-      <div className="jobs">
-        <h3>Jobs</h3>
-        <input
-          type="text"
-          autoFocus
-          value={text}
-          onChange={this.handleChange}
-          placeholder="Front End, Full-time, Chennai"
-        />
-        <div className="job-listing">
-          {msg !== "" ? <h3>{msg}</h3> : null}
-          {jobs
-            .filter(
-              j =>
-                j.title.toLowerCase().includes(text.toLowerCase()) ||
-                j.location.toLowerCase().includes(text.toLowerCase()) ||
-                j.detail.toLowerCase().includes(text.toLowerCase()) ||
-                j.company.toLowerCase().includes(text.toLowerCase())
-            )
-            .map(j => (
-              <div class="job-card" key={j.id}>
-                <h3>
-                  <a href={j.link} target="_blank">
-                    {j.company}
-                  </a>
-                </h3>
-                <div>
-                  <div>
-                    <strong>{j.title}</strong>
-                    <span>{j.experience}</span>
-                  </div>
-                  <div>{j.detail}</div>
-                  <div>{j.description}</div>
-                  <div>
-                    <strong>Location</strong>
-                    <span>{j.location}</span>
-                  </div>
-                  <div>
-                    <strong>Contact</strong>
-                    <a href={`mailto:${j.contact}`}>{j.contact}</a>
-                  </div>
-                  <div>
-                    <strong>Posted At</strong>
-                    <span>{j.date}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
+  return (
+    <div className="jobs">
+      <h3>Jobs</h3>
+      <input
+        type="text"
+        autoFocus
+        value={search}
+        onChange={handleSearch}
+        placeholder="Front End, Full-time, Chennai"
+      />
+      <div className="job-listing">
+        {error !== "" ? <h3>{error}</h3> : null}
       </div>
-    );
-  }
-}
+      <div className="job-listing">
+        {error !== "" ? <h3>{error}</h3> : null}
+        {list.map(j => (
+          <div className="job-card" key={j.id}>
+            <h3>
+              <a href={j.link} target="_blank">
+                {j.company}
+              </a>
+            </h3>
+            <div>
+              <div>
+                <strong>{j.title}</strong>
+                <span>{j.experience}</span>
+              </div>
+              <div>{j.detail}</div>
+              <div>{j.description}</div>
+              <div>
+                <strong>Location</strong>
+                <span>{j.location}</span>
+              </div>
+              <div>
+                <strong>Contact</strong>
+                <a href={`mailto:${j.contact}`}>{j.contact}</a>
+              </div>
+              <div>
+                <strong>Posted At</strong>
+                <span>{j.date}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default Jobs;
+const mapStateToProps = ({ jobs }) => ({
+  error: jobs.error,
+  filter: jobs.filter,
+  list: getFilteredJobs(jobs)
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    _getJobs: getJobs,
+    _filterJobs: filterJobs
+  }
+)(Jobs);
