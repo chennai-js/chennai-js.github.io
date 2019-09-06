@@ -1,91 +1,86 @@
-import React, { Component } from "react";
+import { connect } from "react-redux";
+import React, { useEffect, useState, useCallback } from "react";
 
-const URL =
-  "https://hooks.slack.com/services/T412S9JCV/BAVFN0LGL/8XG76nQ5nIjDkFdtlLI4kXs";
+import { joinSlack } from "src/actions";
 
-class Slack extends Component {
-  state = {
-    name: "",
-    email: "",
-    msg: "",
-    error: false
-  };
+const Slack = ({ error, msg, _joinSlack }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-  handleJoin = e => {
-    e.preventDefault();
-    const { name, email } = this.state;
-    const msg = `${name} (${email}) would like to join our Slack. Can you please send an invite?`;
+  const handleName = useCallback(
+    e => {
+      const { value } = e.target;
+      setName(value);
+    },
+    [setName]
+  );
 
-    fetch(URL, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({ text: msg })
-    })
-      .then(() => {
-        this.setState({
-          error: false,
-          msg: "You Request has been sent you will get invitaion link soon"
-        });
-      })
-      .catch(e => {
-        this.setState({
-          error: true,
-          msg: "Some thing was wrong please try again"
-        });
-      });
-  };
+  const handleEmail = useCallback(
+    e => {
+      const { value } = e.target;
+      setEmail(value);
+    },
+    [setEmail]
+  );
 
-  handleChange = e => {
-    const { value, id } = e.target;
-    this.setState({ [id]: value });
-  };
+  const handleJoin = useCallback(
+    e => {
+      e.preventDefault();
+      _joinSlack({ name, email });
+    },
+    [email, name]
+  );
 
-  render() {
-    const { msg, error, name, email } = this.state;
+  return (
+    <div className="slack">
+      {!error && msg === "" ? (
+        <form onSubmit={handleJoin}>
+          <h3>
+            Join us on
+            <a target="_blank" href="https://chennai-js.slack.com/">
+              Slack
+            </a>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="User Name"
+                value={name}
+                onChange={handleName}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmail}
+                required
+              />
+            </div>
+            {error ? <div className="error">{msg}</div> : null}
+            <input type="submit" value="Join" />
+          </h3>
+        </form>
+      ) : (
+        <h3>{msg}</h3>
+      )}
+    </div>
+  );
+};
 
-    return (
-      <div className="slack">
-        {!error && msg === "" ? (
-          <form onSubmit={this.handleJoin}>
-            <h3>
-              Join us on
-              <a target="_blank" href="https://chennai-js.slack.com/">
-                Slack
-              </a>
-              <div className="form-group">
-                <label>Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="User Name"
-                  value={name}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              {error ? <div className="error">{msg}</div> : null}
-              <input type="submit" value="Join" />
-            </h3>
-          </form>
-        ) : (
-          <h3>{msg}</h3>
-        )}
-      </div>
-    );
+const mapStateToProps = ({ slack }) => ({
+  msg: slack.msg,
+  error: slack.error
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    _joinSlack: joinSlack
   }
-}
-
-export default Slack;
+)(Slack);
