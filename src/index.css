@@ -99,6 +99,34 @@ a {
   justify-content: center;
 }
 
+.jobs > h3 {
+  padding-left: 0.5em;
+}
+
+.jobs-new {
+  float: right;
+  height: 3em;
+  width: 10em;
+  text-transform: uppercase;
+  color: #ffc732;
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #231f20;
+  background-color: #231f20;
+  padding: 0px 10px;
+}
+
+.jobs-new:hover {
+  transition: 0.4s all;
+  background: #ffc732;
+  color: #231f20;
+}
+
 .jobs > input[type="text"] {
   padding: 10px 20px;
   display: block;
@@ -170,4 +198,14 @@ input[type="submit"] {
 
 .error {
   color: red;
+}
+
+.add-jobs {
+  max-width: 75%;
+  margin: auto;
+  min-width: 100px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
