@@ -8,6 +8,7 @@ import Slack from "./Slack";
 import Resouces from "./Resources";
 import Talks from "./Talks";
 import Jobs from "./Jobs";
+import AddJobs from "./AddJobs";
 
 const App = () => (
   <Router>
@@ -18,6 +19,7 @@ const App = () => (
       <Route path="/talks" component={Talks} />
       <Route path="/slack" component={Slack} />
       <Route path="/jobs" component={Jobs} />
+      <Route path="/add-jobs" component={AddJobs} />
     </div>
   </Router>
 );

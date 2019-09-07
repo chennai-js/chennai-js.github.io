@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 
 class Jobs extends Component {
   state = {
@@ -13,10 +14,11 @@ class Jobs extends Component {
     this.setState({ text: this.params.get("text") || "" });
 
     fetch(
-      "https://spreadsheets.google.com/feeds/list/1cNWOxv5M_NSV_ucf4ywLemWgu6r0Z3h2HHDyiDGrTho/default/public/full?alt=json"
+      "https://spreadsheets.google.com/feeds/list/1u3PziSJ8zGGrH8Hw8ol6Tiq8EkelhsD7DICg7PWp46k/default/public/full?alt=json"
     )
       .then(resp => resp.json())
       .then(data => {
+        console.log(data.feed.entry);
         this.setState({
           msg: "",
           jobs: data.feed.entry.map(job => ({
@@ -27,13 +29,14 @@ class Jobs extends Component {
             location: job.gsx$location.$t,
             contact: job.gsx$contactemail.$t,
             link: job.gsx$joblink.$t,
-            detail: job.gsx$moredetails.$t,
+            detail: job.gsx$description.$t,
             date: job.gsx$dateofposting.$t,
             description: job.content.text
           }))
         });
       })
       .catch(e => {
+        console.log(e);
         this.setState({
           msg: "Error Fetching Job listing"
         });
@@ -55,7 +58,12 @@ class Jobs extends Component {
 
     return (
       <div className="jobs">
-        <h3>Jobs</h3>
+        <h3>
+          Jobs
+          <NavLink to="/add-jobs" className="jobs-new">
+            Add
+          </NavLink>
+        </h3>
         <input
           type="text"
           autoFocus
@@ -74,7 +82,7 @@ class Jobs extends Component {
                 j.company.toLowerCase().includes(text.toLowerCase())
             )
             .map(j => (
-              <div class="job-card" key={j.id}>
+              <div className="job-card" key={j.id}>
                 <h3>
                   <a href={j.link} target="_blank">
                     {j.company}
