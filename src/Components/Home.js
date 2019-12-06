@@ -16,7 +16,13 @@ const Home = () => (
 
     <p>
       Join the conversation on
-      <Link to="http://h65.in/qr-2.svg">WhatsApp</Link> 💬
+      <a
+        href="http://h65.in/qr-2.svg"
+        target="_blank"
+      >
+        WhatsApp
+      </a>
+      💬
     </p>
 
     <p>
