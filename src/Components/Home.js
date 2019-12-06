@@ -11,7 +11,7 @@ const Home = () => (
     <h2>The Javascript Community in Chennai</h2>
     Next meetup: {'  '}
     <a className="externalLink" href="https://www.meetup.com/meetup-group-zZPQtwTs/events/266751237/" target="_blank">
-      Nov 2
+      Dec 7
     </a>
 
     <p>
