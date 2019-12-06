@@ -16,8 +16,7 @@ const Home = () => (
 
     <p>
       Join the conversation on
-      <img src={Slack} alt="Slack" />
-      <Link to="/slack">Slack</Link> 💬
+      <Link to="http://h65.in/qr-2.svg">WhatsApp</Link> 💬
     </p>
 
     <p>
