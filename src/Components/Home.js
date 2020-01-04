@@ -10,8 +10,8 @@ const Home = () => (
     <h3>Welcome to</h3>
     <h2>The Javascript Community in Chennai</h2>
     Next meetup: {'  '}
-    <a className="externalLink" href="https://www.meetup.com/meetup-group-zZPQtwTs/events/266751237/" target="_blank">
-      Dec 7
+    <a className="externalLink" href="https://www.meetup.com/meetup-group-zZPQtwTs/events/267530481/" target="_blank">
+      Jan 3
     </a>
 
     <p>
